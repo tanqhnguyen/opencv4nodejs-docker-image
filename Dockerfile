@@ -31,7 +31,7 @@ RUN apk add --update --no-cache \
   ln -vfs /usr/include/locale.h /usr/include/xlocale.h
 
 # https://github.com/npm/npm/issues/3849
-RUN npm install -g opencv4nodejs --unsafe-perm
+RUN cd / && npm install opencv4nodejs
 
 # Clean up
 RUN cd / && apk del --purge build-base clang clang-dev cmake pkgconf wget openblas-dev \
@@ -40,7 +40,7 @@ RUN cd / && apk del --purge build-base clang clang-dev cmake pkgconf wget openbl
   ffmpeg-dev libavc1394-dev && \
   rm -vrf /var/cache/apk/*
 
-ENV NODE_PATH=/usr/local/lib/node_modules
+ENV NODE_PATH=/node_modules
 
 # make sure we have everything
 RUN node -e "require('opencv4nodejs')"
